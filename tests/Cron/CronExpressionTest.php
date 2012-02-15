@@ -139,6 +139,26 @@ class CronExpressionTest extends \PHPUnit_Framework_TestCase
             array('* * * * 5#2', strtotime('2011-07-01 00:00:00'), '2011-07-08 00:00:00', false),
             array('* * * * 5#1', strtotime('2011-07-01 00:00:00'), '2011-07-01 00:00:00', true),
             array('* * * * 3#4', strtotime('2011-07-01 00:00:00'), '2011-07-27 00:00:00', false),
+        // End of Month
+            array('01 * L * *', strtotime('2012-02-29 00:02:00'), '2012-02-29 01:01:00', false),
+            array('01 * L * *', strtotime('2012-02-29 00:01:00'), '2012-02-29 00:01:00', true),
+            array('01 * L * *', strtotime('2012-03-01 00:01:00'), '2012-03-31 00:01:00', false),
+            array('01 * L * *', strtotime('2012-03-02 00:01:00'), '2012-03-31 00:01:00', false),
+            array('01 * L * *', strtotime('2012-04-04 00:01:00'), '2012-04-30 00:01:00', false),
+            array('01 * L * *', strtotime('2012-05-01 00:01:00'), '2012-05-31 00:01:00', false),
+            array('01 * L * *', strtotime('2012-06-01 00:01:00'), '2012-06-30 00:01:00', false),
+            array('01 * L */6 *', strtotime('2012-05-01 00:01:00'), '2012-06-30 00:01:00', false),
+            array('01 * L */6 *', strtotime('2012-01-01 00:01:00'), '2012-06-30 00:01:00', false),
+            array('01 * L */6 *', strtotime('2012-07-01 00:01:00'), '2012-12-31 00:01:00', false),
+            array('01 * L */6 *', strtotime('2012-12-31 00:01:00'), '2012-12-31 00:01:00', true),
+            array('01 * L */2 *', strtotime('2012-01-01 00:01:00'), '2012-02-29 00:01:00', false),
+            array('01 * L */2 *', strtotime('2012-05-01 00:01:00'), '2012-06-30 00:01:00', false),
+            array('01 * L */3 *', strtotime('2012-01-01 00:01:00'), '2012-03-31 00:01:00', false),
+            array('01 * L */3 *', strtotime('2012-01-01 00:01:00'), '2012-03-31 00:01:00', false),
+            array('01 * L */2 *', strtotime('29 feb 2012 midnight'), '2012-02-29 00:01:00', false),
+            array('01 * L */2 *', strtotime('28 feb 2012 midnight'), '2012-02-29 00:01:00', false),
+            array('01 * L * *', strtotime('28 feb 2012 midnight'), '2012-02-29 00:01:00', false),
+            array('01 * L */7 *', strtotime('28 feb 2012 midnight'), '2012-07-31 00:01:00', false),
         );
     }
 
